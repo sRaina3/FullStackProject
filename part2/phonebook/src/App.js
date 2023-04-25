@@ -3,9 +3,10 @@ import Note from './components/Note'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas', num: '040-1234567' }
   ]) 
   const [newName, setNewName] = useState('enter name')
+  const [newNum, setNewNum] = useState('enter number')
 
   const addNote = (event) => {
     event.preventDefault()
@@ -13,10 +14,12 @@ const App = () => {
       alert(`${newName} is already added to phonebook`)
     } else {
       const objectToAdd = {
-        name: newName
+        name: newName,
+        num: newNum
       }
       setPersons(persons.concat(objectToAdd))
       setNewName('')
+      setNewNum('')
     }
   }
 
@@ -24,12 +27,17 @@ const App = () => {
     setNewName(event.target.value)
   }
 
+  const updateNum = (event) => {
+    setNewNum(event.target.value)
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
       <form onSubmit={addNote}>
         <div>
-          name: <input value={newName} onChange={updateName}/>
+          <div>name: <input value={newName} onChange={updateName}/></div>
+          <div>number: <input value={newNum} onChange={updateNum}/></div>
         </div>
         <div>
           <button type="submit">add</button>
@@ -37,7 +45,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <div>
-        {persons.map(p => <Note key={p.name} name={p.name} />)}
+        {persons.map(p => <Note key={p.name} name={p.name} num={p.num}/>)}
       </div>
     </div>
   )
