@@ -10,9 +10,11 @@ const App = () => {
     { name: 'Dan Abramov', num: '12-43-234345', id: 3 },
     { name: 'Mary Poppendieck', num: '39-23-6423122', id: 4 }
   ]) 
+
   const [newName, setNewName] = useState('enter name')
   const [newNum, setNewNum] = useState('enter number')
   const [filter, setFilter] = useState('')
+  const [displayFilter, setDisplay] = useState('')
 
   const addNote = (event) => {
     event.preventDefault()
@@ -39,6 +41,7 @@ const App = () => {
 
   const updateFilter = (event) => {
     setFilter(event.target.value.toUpperCase())
+    setDisplay(event.target.value)
   }
 
   const filteredArr = persons.filter(elem => elem.name.toUpperCase().includes(filter))
@@ -46,7 +49,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Filter filter={filter} onChange={updateFilter}/>
+      <Filter filter={displayFilter} onChange={updateFilter}/>
       <h2> add a new</h2>
       <PersonForm newName={newName} newNum={newNum} 
                   nameChange={updateName} numChange={updateNum} addNote={addNote}/>

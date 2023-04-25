@@ -1,5 +1,4 @@
-const Note = ({name, num}) => {
-  return <div>{name} {num}</div>
-}
+const Note = ({name, num}) => 
+  <div>{name} {num}</div>
 
 export default Note
