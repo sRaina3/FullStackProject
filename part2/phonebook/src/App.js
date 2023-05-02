@@ -53,6 +53,7 @@ const App = () => {
   }
 
   const removeNum = (person) => {
+    numService.deleteNum(person.id)
     setPersons(persons.toSpliced(persons.indexOf(person), 1))
   }
 
