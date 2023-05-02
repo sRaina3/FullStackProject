@@ -52,6 +52,10 @@ const App = () => {
     setDisplay(event.target.value)
   }
 
+  const removeNum = (person) => {
+    setPersons(persons.toSpliced(persons.indexOf(person), 1))
+  }
+
   const filteredArr = persons.filter(elem => elem.name.toUpperCase().includes(filter))
 
   return (
@@ -62,7 +66,7 @@ const App = () => {
       <PersonForm newName={newName} newNum={newNum} 
                   nameChange={updateName} numChange={updateNum} addNote={addNote}/>
       <h2>Numbers</h2>
-      <Persons arr={filteredArr}/>
+      <Persons arr={filteredArr} removeNum={removeNum}/>
     </div>
   )
 }

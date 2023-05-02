@@ -10,4 +10,9 @@ const addNum = (newNum) => {
   return request.then(respone => respone.data)
 }
 
-export default {getPB, addNum}
+const deleteNum = (id) => {
+  const request = axios.delete(`http://localhost:3001/persons/${id}`)
+  return request.then(response => response.data)
+}
+
+export default {getPB, addNum, deleteNum}
