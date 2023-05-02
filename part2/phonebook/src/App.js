@@ -53,6 +53,7 @@ const App = () => {
   }
 
   const removeNum = (person) => {
+    window.confirm(`Delete ${person.name}?`)
     numService.deleteNum(person.id)
       .then(deletedNum => {
         console.log(`number deleted`)
