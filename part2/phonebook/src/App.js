@@ -23,7 +23,12 @@ const App = () => {
   const addNote = (event) => {
     event.preventDefault()
     if (persons.find(elem => elem.name === newName)) {
-      alert(`${newName} is already added to phonebook`)
+      const objectToAdd = {
+        name: newName,
+        number: newNum 
+      }
+      const newPersons = persons.map(p => p.name !== newName ? p : objectToAdd)
+      setPersons(newPersons)
     } else {
       const objectToAdd = {
         name: newName,
