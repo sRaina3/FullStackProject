@@ -23,19 +23,21 @@ const App = () => {
   const addNote = (event) => {
     event.preventDefault()
     if (persons.find(elem => elem.name === newName)) {
-      const objectToAdd = {
-        name: newName,
-        number: newNum 
+      if (window.confirm(`${newName} is already added to the phonebook, replace the old number with a new one?`)) {
+        const objectToAdd = {
+          name: newName,
+          number: newNum 
+        }
+        const id = persons.indexOf(persons.find(elem => elem.name === newName))
+        numService.changeNum(objectToAdd, id + 1)
+          .then(updatedNum => {
+            console.log('number updated')
+            const newPersons = persons.map(p => p.name !== newName ? p : updatedNum)
+            setPersons(newPersons)
+            setNewName('')
+            setNewNum('')
+          })
       }
-      const id = persons.indexOf(persons.find(elem => elem.name === newName))
-      numService.changeNum(objectToAdd, id + 1)
-        .then(updatedNum => {
-          console.log('number updated')
-          const newPersons = persons.map(p => p.name !== newName ? p : updatedNum)
-          setPersons(newPersons)
-          setNewName('')
-          setNewNum('')
-        })
     } else {
       const objectToAdd = {
         name: newName,
