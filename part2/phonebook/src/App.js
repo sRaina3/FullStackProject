@@ -27,8 +27,15 @@ const App = () => {
         name: newName,
         number: newNum 
       }
-      const newPersons = persons.map(p => p.name !== newName ? p : objectToAdd)
-      setPersons(newPersons)
+      const id = persons.indexOf(persons.find(elem => elem.name === newName))
+      numService.changeNum(objectToAdd, id + 1)
+        .then(updatedNum => {
+          console.log('number updated')
+          const newPersons = persons.map(p => p.name !== newName ? p : updatedNum)
+          setPersons(newPersons)
+          setNewName('')
+          setNewNum('')
+        })
     } else {
       const objectToAdd = {
         name: newName,

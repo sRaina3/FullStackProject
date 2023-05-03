@@ -7,7 +7,7 @@ const getPB = () => {
 
 const addNum = (newNum) => {
   const request = axios.post('http://localhost:3001/persons', newNum)
-  return request.then(respone => respone.data)
+  return request.then(response => response.data)
 }
 
 const deleteNum = (id) => {
@@ -15,4 +15,9 @@ const deleteNum = (id) => {
   return request.then(response => response.data)
 }
 
-export default {getPB, addNum, deleteNum}
+const changeNum = (newNum, id) => {
+  const request = axios.put(`http://localhost:3001/persons/${id}`, newNum)
+  return request.then(response => response.data)
+}
+
+export default {getPB, addNum, deleteNum, changeNum}
