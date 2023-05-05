@@ -41,6 +41,9 @@ const App = () => {
             setNewName('')
             setNewNum('')
           })
+          .catch(error => {
+            setNotif(`Information of ${newName} has already been removed from the server`)
+          })
       }
     } else {
       const objectToAdd = {
