@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import Countries from './components/Countries'
 
 const App = () => {
   const [countries, setCountries] = useState([])
-  const [displayCountries, setDisplayCountries] = useState([])
   const [filter, setFilter] = useState('')
 
   useEffect(() => {
@@ -15,18 +15,16 @@ const App = () => {
       })
   }, [])
 
-  const updateDisplay = () => {
-    setDisplayCountries(countries.filter(c => c.name.includes(filter)))
+  const updateFilter = (event) => {
+    setFilter(event.target.value.toUpperCase())
   }
+
+  const filteredCountries = countries.filter(c => c.name.common.toUpperCase().includes(filter))
 
   return (
     <div>
-      <form onSubmit>
-        <div>
-          <div>find countries <input></input></div>
-        </div>
-      </form>
-      {countries.map(c => <div>{c.name.common}</div>)}
+      <div>find countries <input onChange={updateFilter}/></div>
+      <Countries countries={filteredCountries}/>
     </div>
   )
 }
