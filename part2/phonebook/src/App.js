@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 import numService from './services/Numbers'
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
   const [newNum, setNewNum] = useState('enter number')
   const [filter, setFilter] = useState('')
   const [displayFilter, setDisplay] = useState('')
+  const [displayNotif, setNotif] = useState(null)
 
   useEffect(() => {
     console.log('effect')
@@ -31,6 +33,8 @@ const App = () => {
         const id = persons.indexOf(persons.find(elem => elem.name === newName))
         numService.changeNum(objectToAdd, id + 1)
           .then(updatedNum => {
+            setNotif(`${newName} successfully updated`)
+            setTimeout(() => {setNotif(null)}, 3000)
             console.log('number updated')
             const newPersons = persons.map(p => p.name !== newName ? p : updatedNum)
             setPersons(newPersons)
@@ -45,6 +49,8 @@ const App = () => {
       }
       numService.addNum(objectToAdd)
         .then(addedNum => {
+          setNotif(`${newName} successfully added`)
+          setTimeout(() => {setNotif(null)}, 3000)
           console.log('number added')
           setPersons(persons.concat(addedNum))
           setNewName('')
@@ -85,6 +91,7 @@ const App = () => {
       <PersonForm newName={newName} newNum={newNum} 
                   nameChange={updateName} numChange={updateNum} addNote={addNote}/>
       <h2>Numbers</h2>
+      <Notification message={displayNotif}/>
       <Persons arr={filteredArr} removeNum={removeNum}/>
     </div>
   )
