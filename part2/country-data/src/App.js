@@ -3,6 +3,16 @@ import { useState, useEffect } from 'react'
 import Countries from './components/Countries'
 
 const App = () => {
+  const buttonStyle = {
+    textAlign: 'center',
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 24
+  }
+  
+  const appBackground = {
+    backgroundColor: 'darkGray'
+  }
   const [countries, setCountries] = useState([])
   const [filter, setFilter] = useState('')
 
@@ -21,8 +31,8 @@ const App = () => {
   const filteredCountries = countries.filter(c => c.name.common.toUpperCase().includes(filter))
 
   return (
-    <div>
-      <div>find countries <input onChange={updateFilter}/></div>
+    <div style={appBackground}>
+      <div style={buttonStyle}>find countries <input onChange={updateFilter}/></div>
       <Countries countries={filteredCountries}/>
     </div>
   )
