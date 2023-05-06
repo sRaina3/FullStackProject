@@ -15,9 +15,8 @@ const App = () => {
       })
   }, [])
 
-  const updateFilter = (event) => {
-    setFilter(event.target.value.toUpperCase())
-  }
+  const updateFilter = (event) => setFilter(event.target.value.toUpperCase())
+
 
   const filteredCountries = countries.filter(c => c.name.common.toUpperCase().includes(filter))
 

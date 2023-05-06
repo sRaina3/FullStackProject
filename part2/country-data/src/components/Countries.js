@@ -10,11 +10,7 @@ const Countries = ({countries}) => {
   }
 
   if (countries.length > 10) {
-    return (
-      <div>
-        Too many matches, specify another filter
-      </div>
-    )
+    return <div> Too many matches, specify another filter </div>
   } else if (countries.length < 3 && countries.length !== 0) {
     const country1 = countries[0]
     if (countries.length > 1) {
@@ -26,11 +22,7 @@ const Countries = ({countries}) => {
         </div>
       )
     } else {
-      return (
-        <div>
-          <Country c={country1}/>
-        </div>
-      )
+      return <div><Country c={country1}/></div>
     }
   } else {
     return (
