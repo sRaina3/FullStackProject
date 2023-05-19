@@ -34,6 +34,17 @@ app.get('/api/persons', (request, response) => {
   response.send(nums)
 })
 
+app.get('/info', (request, response) => {
+  const start = new Date().toLocaleString()
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+  response.send(
+      `
+      <p>Phonebook has info for ${nums.length} people</p>
+      <p> ${start} ${timeZone}</p>
+      `
+  )
+})
+
 
 const PORT = 3001
 app.listen(PORT, () => {
