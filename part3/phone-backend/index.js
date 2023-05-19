@@ -63,6 +63,15 @@ app.delete('/api/persons/:id', (request, response) => {
 
 app.post('/api/persons', (request, response) => {
   const newId = Math.floor(Math.random() * 10000000)
+  if (!request.body.number || !request.body.name) {
+    return response.status(400).json({ 
+      error: 'name or number missing' 
+    })
+  } else if (nums.find(elem => elem.name === request.body.name)) {
+    return response.status(400).json({ 
+      error: 'number already present' 
+    })
+  }
   const newNum = {
     id: newId,
     name: request.body.name,
