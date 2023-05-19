@@ -34,6 +34,16 @@ app.get('/api/persons', (request, response) => {
   response.send(nums)
 })
 
+app.get('/api/persons/:id', (request, response) => {
+  const id = Number(request.params.id)
+  const correct = nums.find(nums => nums.id === id)
+  if (correct) {
+    response.send(correct)
+  } else {
+    response.status(404).end()
+  }
+})
+
 app.get('/info', (request, response) => {
   const start = new Date().toLocaleString()
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
