@@ -7,7 +7,6 @@ app.use(express.static('build'))
 app.use(express.json())
 app.use(cors())
 
-
 let notes = [
   {
     id: 1,
