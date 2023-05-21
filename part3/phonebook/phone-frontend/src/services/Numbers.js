@@ -1,22 +1,22 @@
 import axios from 'axios'
 
 const getPB = () => {
-  const request = axios.get('http://localhost:3001/persons')
+  const request = axios.get('/api/persons')
   return request.then(respone => respone.data)
 }
 
 const addNum = (newNum) => {
-  const request = axios.post('http://localhost:3001/persons', newNum)
+  const request = axios.post('/api/persons', newNum)
   return request.then(response => response.data)
 }
 
 const deleteNum = (id) => {
-  const request = axios.delete(`http://localhost:3001/persons/${id}`)
+  const request = axios.delete(`/api/persons/${id}`)
   return request.then(response => response.data)
 }
 
 const changeNum = (newNum, id) => {
-  const request = axios.put(`http://localhost:3001/persons/${id}`, newNum)
+  const request = axios.put(`/api/persons/${id}`, newNum)
   return request.then(response => response.data)
 }
 
