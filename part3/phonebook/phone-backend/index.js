@@ -40,12 +40,14 @@ app.get('/api/persons/:id', (request, response, next) => {
 app.get('/info', (request, response) => {
   const start = new Date().toLocaleString()
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
-  response.send(
+  Person.find({}).then(people => {
+    response.send(
       `
-      <p>Phonebook has info for ${nums.length} people</p>
+      <p>Phonebook has info for ${people.length} people</p>
       <p> ${start} ${timeZone}</p>
       `
   )
+  })
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
