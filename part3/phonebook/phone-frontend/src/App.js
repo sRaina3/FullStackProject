@@ -30,8 +30,8 @@ const App = () => {
           name: newName,
           number: newNum 
         }
-        const id = persons.indexOf(persons.find(elem => elem.name === newName))
-        numService.changeNum(objectToAdd, id + 1)
+        const id = persons.find(elem => elem.name === newName).id
+        numService.changeNum(objectToAdd, id)
           .then(updatedNum => {
             setNotif(`${newName} successfully updated`)
             setTimeout(() => {setNotif(null)}, 3000)
