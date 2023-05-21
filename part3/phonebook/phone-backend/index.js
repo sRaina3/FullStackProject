@@ -1,5 +1,8 @@
+require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
+const Person = require('./models/person')
+
 const app = express()
 
 app.use(express.json())
@@ -12,45 +15,20 @@ morgan.token('body', function(req, res) {
   }
 });
 
-let nums = [
-  { 
-    id: 1,
-    name: "Arto Hellas", 
-    number: "040-123456"
-  },
-  { 
-    id: 2,
-    name: "Ada Lovelace", 
-    number: "39-44-5323523"
-  },
-  { 
-    id: 3,
-    name: "Dan Abramov", 
-    number: "12-43-234345"
-  },
-  { 
-    id: 4,
-    name: "Mary Poppendieck", 
-    number: "39-23-6423122"
-  }
-]
-
 app.get('/', (request, response) => {
   response.send('<h1>Server is Functioning!</h1>')
 })
 
 app.get('/api/persons', (request, response) => {
-  response.send(nums)
+  Person.find({}).then(people => { 
+    response.json(people)
+  })
 })
 
 app.get('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  const correct = nums.find(nums => nums.id === id)
-  if (correct) {
-    response.send(correct)
-  } else {
-    response.status(404).end()
-  }
+  Person.findById(request.params.id).then(p => {
+    response.json(p)
+  })
 })
 
 app.get('/info', (request, response) => {
@@ -71,27 +49,17 @@ app.delete('/api/persons/:id', (request, response) => {
 })
 
 app.post('/api/persons', (request, response) => {
-  const newId = Math.floor(Math.random() * 10000000)
-  if (!request.body.number || !request.body.name) {
-    return response.status(400).json({ 
-      error: 'name or number missing' 
-    })
-  } else if (nums.find(elem => elem.name === request.body.name)) {
-    return response.status(400).json({ 
-      error: 'number already present' 
-    })
-  }
-  const newNum = {
-    id: newId,
+  const newNum = new Person ({
     name: request.body.name,
-    number: request.body.number
-  }
-  nums = nums.concat(newNum)
-  response.send(newNum)
+    number: request.body.number 
+  })
+  newNum.save().then(p => {
+    response.json(p)
+  })
 })
 
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
