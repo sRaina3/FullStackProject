@@ -1,6 +1,6 @@
 GET http://localhost:3001/api/notes
 ###
-GET http://localhost:3001/api/notes/1
+GET http://localhost:3001/api/notes/646a6e9f3061e8f17c510d3c
 ###
 POST http://localhost:3001/api/notes/ HTTP/1.1
 content-type: application/json
@@ -9,4 +9,14 @@ content-type: application/json
     "content": "html something",
     "important": true,
     "id": 1
+}
+###
+DELETE http://localhost:3001/api/notes/646a7f53495fcaf37c954039
+###
+PUT http://localhost:3001/api/notes/646a7eb673692b2e2e6faa77 HTTP/1.1
+content-type: application/json
+
+{
+    "content": "Joe Biden returns",
+    "important": true
 }
