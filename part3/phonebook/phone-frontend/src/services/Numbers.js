@@ -1,7 +1,8 @@
 import axios from 'axios'
+const baseURL = 'https://phonebook-4rlh.onrender.com/'
 
 const getPB = () => {
-  const request = axios.get('/api/persons')
+  const request = axios.get(baseURL + 'api/persons')
   return request.then(respone => respone.data)
 }
 
