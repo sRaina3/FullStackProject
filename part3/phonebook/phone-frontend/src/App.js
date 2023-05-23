@@ -58,8 +58,7 @@ const App = () => {
           setPersons(persons.concat(addedNum))
           setNewName('')
           setNewNum('')
-        })
-        .catch(error => {
+        }).catch(error => {
           // this is the way to access the error message
           console.log(error.response.data.error)
         })
